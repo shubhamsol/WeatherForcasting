@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <title>weather</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="row" style="background:rgba(0, 128, 0, 0.356); color: white;">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"> History</a></li>
+    </ul>
+  </nav>
+  <br />
+  <br />
+  <center class="row">
+    <form method="post" class="col-md-6 col-md-offset-3">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Search" />
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="date" style="margin-top: 10px; padding:10px; display:block;">
+        from
+        <input type="text" name="dayFrom" placeholder="day"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+        <input type="text" name="monthFrom" placeholder="month"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+        <input type="text" name="yearFrom" placeholder="year"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+      </div>
+      <div>
+        to
+        <input type="text" name="dayTo" placeholder="day"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+        <input type="text" name="monthTo" placeholder="month"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+        <input type="text" name="yearTo" placeholder="year"
+          style="border-radius: 2px; border:none;background-color: lightgrey;" />
+      </div>
+    </form>
+  </center>
+  <div class="row"></div>
+  <br />
+
+  {% if country_code and coordinate and temp and pressure and humidity %}
+  {% endif %}
+  <div class="parent" style="margin:0% 20%;">
+    <div class="div1">
+      <!--
+        <h3>country code : {{country_code}}</h3>
+        <h5>coordinate : {{coordinate}}</h5>
+        <h5>temp : {{temp}}</h5>
+        <h5>pressure : {{pressure}}</h5>
+        <h5>humidity : {{humidity}}</h5>-->
+      <h1>{{day1temp}}</h1>
+      <h1>{{day1hum}}</h1>
+      <h1>{{day1sunrise}}</h1>
+      <h1>{{day1sunset}}</h1>
+      <h5>{{day2weather}}</h5>
+    </div>
+    <div class="div2">
+      <h1>{{day2temp}}</h1>
+      <h1>{{day2hum}}</h1>
+      <h1>{{day2sunrise}}</h1>
+      <h1>{{day2sunset}}</h1>
+      <h5>{{day2weather}}</h5>
+    </div>
+    <div class="div3">
+      <h1>{{day3temp}}</h1>
+      <h1>{{day3hum}}</h1>
+      <h1>{{day3sunrise}}</h1>
+      <h1>{{day3sunset}}</h1>
+      <h5>{{day2weather}}</h5>
+    </div>
+    <div class="div4">
+      <h1>{{day4temp}}</h1>
+      <h1>{{day4hum}}</h1>
+      <h1>{{day4sunrise}}</h1>
+      <h1>{{day4sunset}}</h1>
+      <h5>{{day2weather}}</h5>
+    </div>
+    <div class="div5">
+      <h1>{{day5temp}}</h1>
+      <h1>{{day5hum}}</h1>
+
+      <h1>{{day5sunrise}}</h1>
+      <h1>{{day5sunset}}</h1>
+      <h5>{{day2weather}}</h5>
+    </div>
+    <div class="div6">45</div>
+    <div class="div7">66</div>
+    <div class="div8">45</div>
+  </div>
+
+  <br />
+  <div class="map" style="height: 400px;width: 400px;background-color: lightgreen;margin:0% 20%;"></div>
+  <style>
+    body {
+      /*background-image: url("https://i.imgur.com/kofgK6G.png");*/
+      background-color: #cccccc;
+    }
+
+    .parent {
+      display: grid;
+      grid-template-columns: 5fr repeat(7, 1fr);
+      grid-template-rows: 5fr repeat(4, 1fr);
+      grid-column-gap: 015px;
+      grid-row-gap: 0px;
+    }
+
+    .div1 {
+      grid-area: 1 / 1 / 2 / 2;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div2 {
+      grid-area: 1 / 2 / 2 / 3;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div3 {
+      grid-area: 1 / 3 / 2 / 4;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div4 {
+      grid-area: 1 / 4 / 2 / 5;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div5 {
+      grid-area: 1 / 5 / 2 / 6;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div6 {
+      grid-area: 1 / 6 / 2 / 7;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div7 {
+      grid-area: 1 / 7 / 2 / 8;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+
+    .div8 {
+      grid-area: 1 / 8 / 2 / 9;
+      background-color: rgba(240, 128, 128, 0.74);
+      height: auto;
+      border-radius: 10px;
+      padding: 5%;
+    }
+  </style>
+</body>
+
+</html>
